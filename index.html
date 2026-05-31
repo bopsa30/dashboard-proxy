@@ -1,26 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
-</head>
-<body>
+<title>Proxy Dashboard Login</title>
 
-<h2>Proxy Dashboard Login</h2>
+<style>
+body{
+    background:#0f172a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+    font-family:Arial,sans-serif;
+}
 
-<input type="password" id="password" placeholder="Password">
-<button onclick="login()">Login</button>
+.card{
+    background:#1e293b;
+    padding:30px;
+    border-radius:15px;
+    width:320px;
+    text-align:center;
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+h2{
+    color:white;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:8px;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:#3b82f6;
+    color:white;
+    font-weight:bold;
+}
+
+button:hover{
+    opacity:0.9;
+}
+</style>
 
 <script>
 function login() {
-    var pass = document.getElementById("password").value;
-
-    if(pass === "rahasia123") {
-        window.location.href = "dashboard.html";
-    } else {
-        alert("Password salah!");
-    }
-}
-</script>
-
-</body>
-</html>
+    var pass = document.getElementBy
