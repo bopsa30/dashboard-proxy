@@ -55,4 +55,34 @@ button:hover{
 
 <script>
 function login() {
-    var pass = document.getElementBy
+    var pass = document.getElementById("password").value;
+
+    if(pass === "rahasia123") {
+        window.location.href = "dashboard.html";
+    } else {
+        alert("Password salah!");
+    }
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Proxy Dashboard</h2>
+
+<input
+type="password"
+id="password"
+placeholder="Enter Password">
+
+<button onclick="login()">
+Login
+</button>
+
+</div>
+
+</body>
+</html>
