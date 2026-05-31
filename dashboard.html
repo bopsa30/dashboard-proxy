@@ -1,19 +1,117 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard</title>
+<title>Proxy Dashboard</title>
+
+<style>
+body{
+    background:#111;
+    color:white;
+    font-family:Arial;
+    margin:0;
+    padding:20px;
+}
+
+.card{
+    background:#1c1c1c;
+    border-radius:15px;
+    padding:20px;
+    max-width:600px;
+    margin:auto;
+}
+
+.title{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.info{
+    background:#2a2a2a;
+    padding:12px;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+.status{
+    color:#4CAF50;
+    font-weight:bold;
+}
+button{
+    margin-top:10px;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+</style>
+
+<script>
+function copyText(text){
+    navigator.clipboard.writeText(text);
+    alert("Copied!");
+}
+</script>
+
 </head>
+
 <body>
 
-<h1>Proxy Dashboard</h1>
+<div class="card">
 
-<p>Status: Active</p>
+<div class="title">
+Proxy Dashboard
+</div>
 
-<p>IP: 1.2.3.4:8000</p>
+<div class="info">
+Status:
+<span class="status">ACTIVE</span>
+</div>
 
-<p>Username: customer</p>
+<div class="info">
+Package:
+Germany Residential
+</div>
 
-<p>Password: xxxxx</p>
+<div class="info">
+Expires:
+31 July 2026
+</div>
+
+<div class="info">
+Host:
+proxy.example.com
+</div>
+
+<div class="info">
+Port:
+10000
+</div>
+
+<div class="info">
+Username:
+customer123
+
+<br><br>
+
+<button onclick="copyText('customer123')">
+Copy Username
+</button>
+
+</div>
+
+<div class="info">
+Password:
+password123
+
+<br><br>
+
+<button onclick="copyText('password123')">
+Copy Password
+</button>
+
+</div>
+
+</div>
 
 </body>
 </html>
