@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Proxy Dashboard</title>
+    <title>Login</title>
 </head>
 <body>
-    <h1>Welcome Bro 😭</h1>
-    <p>Website pertama lu udah jalan.</p>
+
+<h2>Proxy Dashboard Login</h2>
+
+<input type="password" id="password" placeholder="Password">
+<button onclick="login()">Login</button>
+
+<script>
+function login() {
+    var pass = document.getElementById("password").value;
+
+    if(pass === "rahasia123") {
+        window.location.href = "dashboard.html";
+    } else {
+        alert("Password salah!");
+    }
+}
+</script>
+
 </body>
 </html>
