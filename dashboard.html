@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>US Proxy Dashboard</title>
+<title>US Residential Proxy Dashboard</title>
 
 <style>
 body{
@@ -42,14 +42,14 @@ button{
 
 <script>
 
-const lastUpdate = "31 May 2026 - 14:30 WIB";
+const lastUpdate = "01 June 2026 - 09:15 WIB";
 
 const proxies = [
-"1.1.1.1:8000:user1:pass1",
-"1.1.1.2:8000:user2:pass2",
-"1.1.1.3:8000:user3:pass3",
-"1.1.1.4:8000:user4:pass4",
-"1.1.1.5:8000:user5:pass5"
+"US_PROXY_1",
+"US_PROXY_2",
+"US_PROXY_3",
+"US_PROXY_4",
+"US_PROXY_5"
 ];
 
 function copyProxy(index){
@@ -69,10 +69,8 @@ window.onload = function(){
         <div class="proxy">
             <h3>US Proxy #${i+1}</h3>
 
-            <p>${proxies[i]}</p>
-
             <button onclick="copyProxy(${i})">
-                Copy Proxy
+                Copy
             </button>
         </div>
         `;
@@ -88,11 +86,18 @@ window.onload = function(){
 
 <div class="card">
 
-<h1>US Proxy Dashboard</h1>
+<h1>US Residential Proxy Dashboard</h1>
 
 <p>
-Status:
-<span class="status">ACTIVE</span>
+<span class="status">🟢 Active</span>
+</p>
+
+<p>
+Daily Refresh
+</p>
+
+<p>
+5 Available Proxies
 </p>
 
 <p>
@@ -100,12 +105,18 @@ Last Updated:
 <span id="updateTime"></span>
 </p>
 
+<hr>
+
 <div id="proxyList"></div>
 
-<br>
+<hr>
 
 <p>
-Support: Telegram @username
+Need Help?
+</p>
+
+<p>
+Telegram @systemsbad
 </p>
 
 </div>
