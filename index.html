@@ -1,98 +1,144 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>US Residential Proxy Panel</title>
 
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
 body{
-    background:#d6ccbe;
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:Arial,sans-serif;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+radial-gradient(circle at top left,#f7f0df 0%,transparent 35%),
+radial-gradient(circle at bottom right,#ece4d0 0%,transparent 35%),
+linear-gradient(135deg,#f4efe3,#e9e2d3);
+overflow:hidden;
+}
+
+body::before{
+content:"";
+position:absolute;
+width:350px;
+height:350px;
+background:rgba(255,255,255,0.35);
+filter:blur(90px);
+border-radius:50%;
+top:-100px;
+left:-100px;
+}
+
+body::after{
+content:"";
+position:absolute;
+width:300px;
+height:300px;
+background:rgba(255,255,255,0.25);
+filter:blur(90px);
+border-radius:50%;
+bottom:-100px;
+right:-100px;
 }
 
 .card{
-    background:#f5f1eb;
-    width:350px;
-    padding:35px;
-    border-radius:18px;
-    text-align:center;
-    box-shadow:0 0 25px rgba(0,0,0,0.15);
+position:relative;
+z-index:2;
+width:380px;
+max-width:90%;
+padding:35px;
+text-align:center;
+background:rgba(255,255,255,0.35);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,0.4);
+border-radius:25px;
+box-shadow:0 20px 50px rgba(0,0,0,0.08);
+}
+
+.logo{
+width:140px;
+max-width:100%;
+margin-bottom:20px;
 }
 
 h1{
-    color:#2d2d2d;
-    margin-bottom:5px;
-    font-size:28px;
+color:#173b68;
+font-size:28px;
+margin-bottom:8px;
+font-weight:700;
 }
 
 .subtitle{
-    color:#666;
-    margin-bottom:25px;
-    font-size:14px;
-}
-
-.tag{
-    color:#6b8e23;
-    font-size:13px;
-    margin-bottom:20px;
+color:#5f6368;
+font-size:14px;
+margin-bottom:25px;
+letter-spacing:1px;
 }
 
 input{
-    width:100%;
-    box-sizing:border-box;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    background:#ebe4db;
-    color:#222;
-    margin-bottom:15px;
-    font-size:14px;
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:white;
+font-size:14px;
+margin-bottom:15px;
 }
 
 input:focus{
-    outline:none;
+outline:none;
 }
 
 button{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    background:#8b5e3c;
-    color:white;
-    font-size:15px;
-    cursor:pointer;
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#173b68;
+color:white;
+font-weight:bold;
+font-size:15px;
+cursor:pointer;
+transition:0.2s;
 }
 
 button:hover{
-    opacity:0.9;
+transform:translateY(-2px);
 }
 
 .footer{
-    margin-top:20px;
-    color:#777;
-    font-size:12px;
+margin-top:18px;
+font-size:12px;
+color:#777;
 }
 
 </style>
 
 <script>
-function login() {
 
-    var pass = document.getElementById("password").value;
+function login(){
 
-    if(pass === "Pararero_482") {
-        window.location.href = "dashboard.html";
-    } else {
-        alert("Incorrect Password");
-    }
+var pass=document.getElementById("password").value;
+
+if(pass==="rahasia123"){
+window.location.href="dashboard.html";
+}
+else{
+alert("Incorrect Password");
+}
 
 }
+
 </script>
 
 </head>
@@ -101,16 +147,12 @@ function login() {
 
 <div class="card">
 
-<h1>US Residential</h1>
+<img src="1780308231419.png" class="logo">
 
-<h1>Proxy Panel</h1>
+<h1>US Residential Proxy Panel</h1>
 
 <div class="subtitle">
-Private Client Access
-</div>
-
-<div class="tag">
-Secure Dashboard
+PRIVATE CLIENT ACCESS
 </div>
 
 <input
@@ -123,7 +165,7 @@ Login
 </button>
 
 <div class="footer">
-Authorized Access Only
+Secure Access
 </div>
 
 </div>
