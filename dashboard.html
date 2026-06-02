@@ -1,123 +1,283 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>US Residential Proxy Dashboard</title>
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
 body{
-    background:#111;
-    color:white;
-    font-family:Arial,sans-serif;
-    padding:20px;
+background:
+radial-gradient(circle at top left,#f7f0df 0%,transparent 35%),
+radial-gradient(circle at bottom right,#ece4d0 0%,transparent 35%),
+linear-gradient(135deg,#f4efe3,#e9e2d3);
+padding:20px;
+min-height:100vh;
 }
 
-.card{
-    max-width:700px;
-    margin:auto;
-    background:#1a1a1a;
-    padding:20px;
-    border-radius:15px;
+.container{
+max-width:900px;
+margin:auto;
 }
 
-.proxy{
-    background:#222;
-    padding:15px;
-    margin-top:15px;
-    border-radius:10px;
+.header{
+text-align:center;
+margin-bottom:30px;
 }
 
-button{
-    margin-top:10px;
-    padding:10px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
+.logo{
+width:120px;
+margin-bottom:15px;
+}
+
+h1{
+color:#173b68;
+margin-bottom:10px;
 }
 
 .status{
-    color:#4CAF50;
-    font-weight:bold;
+display:inline-block;
+padding:8px 15px;
+border-radius:20px;
+background:#dff7e6;
+color:#1b8a3e;
+font-weight:bold;
+margin-bottom:15px;
 }
+
+.info{
+color:#666;
+font-size:14px;
+margin-top:10px;
+}
+
+.proxy-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+margin-top:25px;
+}
+
+.proxy-card{
+background:rgba(255,255,255,0.45);
+backdrop-filter:blur(15px);
+border-radius:18px;
+padding:18px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.proxy-title{
+font-weight:bold;
+color:#173b68;
+margin-bottom:10px;
+}
+
+.proxy-value{
+background:white;
+padding:10px;
+border-radius:10px;
+font-size:13px;
+word-break:break-all;
+margin-bottom:10px;
+}
+
+button{
+width:100%;
+padding:10px;
+border:none;
+border-radius:10px;
+background:#173b68;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+.support{
+margin-top:35px;
+text-align:center;
+background:rgba(255,255,255,0.4);
+padding:20px;
+border-radius:18px;
+}
+
+.support h3{
+margin-bottom:10px;
+color:#173b68;
+}
+
 </style>
 
 <script>
 
-const lastUpdate = "01 June 2026 - 09:15 WIB";
+function copyProxy(id){
 
-const proxies = [
-"US_PROXY_1",
-"US_PROXY_2",
-"US_PROXY_3",
-"US_PROXY_4",
-"US_PROXY_5"
-];
+var text=document.getElementById(id).innerText;
 
-function copyProxy(index){
-    navigator.clipboard.writeText(proxies[index]);
-    alert("Proxy copied!");
+navigator.clipboard.writeText(text);
+
+alert("Proxy copied");
+
 }
 
-window.onload = function(){
-
-    document.getElementById("updateTime").innerText = lastUpdate;
-
-    let html = "";
-
-    for(let i=0;i<proxies.length;i++){
-
-        html += `
-        <div class="proxy">
-            <h3>US Proxy #${i+1}</h3>
-
-            <button onclick="copyProxy(${i})">
-                Copy
-            </button>
-        </div>
-        `;
-    }
-
-    document.getElementById("proxyList").innerHTML = html;
-}
 </script>
 
 </head>
 
 <body>
 
-<div class="card">
+<div class="container">
+
+<div class="header">
+
+<img src="1780308231419.png" class="logo">
 
 <h1>US Residential Proxy Dashboard</h1>
 
-<p>
-<span class="status">🟢 Active</span>
-</p>
+<div class="status">
+🟢 ACTIVE
+</div>
 
-<p>
+<div class="info">
 Daily Refresh
-</p>
+</div>
 
-<p>
-5 Available Proxies
-</p>
+<div class="info">
+15 Available Proxies
+</div>
 
-<p>
+<div class="info">
 Last Updated:
-<span id="updateTime"></span>
-</p>
+02 June 2026 - 09:15 WIB
+</div>
 
-<hr>
+</div>
 
-<div id="proxyList"></div>
+<div class="proxy-grid">
 
-<hr>
+<!-- Proxy 1 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #1</div>
+<div class="proxy-value" id="p1">ip:port:user:pass</div>
+<button onclick="copyProxy('p1')">Copy</button>
+</div>
 
-<p>
-Need Help?
-</p>
+<!-- Proxy 2 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #2</div>
+<div class="proxy-value" id="p2">ip:port:user:pass</div>
+<button onclick="copyProxy('p2')">Copy</button>
+</div>
 
-<p>
-Telegram @systemsbad
-</p>
+<!-- Proxy 3 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #3</div>
+<div class="proxy-value" id="p3">ip:port:user:pass</div>
+<button onclick="copyProxy('p3')">Copy</button>
+</div>
+
+<!-- Proxy 4 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #4</div>
+<div class="proxy-value" id="p4">ip:port:user:pass</div>
+<button onclick="copyProxy('p4')">Copy</button>
+</div>
+
+<!-- Proxy 5 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #5</div>
+<div class="proxy-value" id="p5">ip:port:user:pass</div>
+<button onclick="copyProxy('p5')">Copy</button>
+</div>
+
+<!-- Proxy 6 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #6</div>
+<div class="proxy-value" id="p6">ip:port:user:pass</div>
+<button onclick="copyProxy('p6')">Copy</button>
+</div>
+
+<!-- Proxy 7 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #7</div>
+<div class="proxy-value" id="p7">ip:port:user:pass</div>
+<button onclick="copyProxy('p7')">Copy</button>
+</div>
+
+<!-- Proxy 8 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #8</div>
+<div class="proxy-value" id="p8">ip:port:user:pass</div>
+<button onclick="copyProxy('p8')">Copy</button>
+</div>
+
+<!-- Proxy 9 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #9</div>
+<div class="proxy-value" id="p9">ip:port:user:pass</div>
+<button onclick="copyProxy('p9')">Copy</button>
+</div>
+
+<!-- Proxy 10 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #10</div>
+<div class="proxy-value" id="p10">ip:port:user:pass</div>
+<button onclick="copyProxy('p10')">Copy</button>
+</div>
+
+<!-- Proxy 11 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #11</div>
+<div class="proxy-value" id="p11">ip:port:user:pass</div>
+<button onclick="copyProxy('p11')">Copy</button>
+</div>
+
+<!-- Proxy 12 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #12</div>
+<div class="proxy-value" id="p12">ip:port:user:pass</div>
+<button onclick="copyProxy('p12')">Copy</button>
+</div>
+
+<!-- Proxy 13 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #13</div>
+<div class="proxy-value" id="p13">ip:port:user:pass</div>
+<button onclick="copyProxy('p13')">Copy</button>
+</div>
+
+<!-- Proxy 14 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #14</div>
+<div class="proxy-value" id="p14">ip:port:user:pass</div>
+<button onclick="copyProxy('p14')">Copy</button>
+</div>
+
+<!-- Proxy 15 -->
+<div class="proxy-card">
+<div class="proxy-title">US Proxy #15</div>
+<div class="proxy-value" id="p15">ip:port:user:pass</div>
+<button onclick="copyProxy('p15')">Copy</button>
+</div>
+
+</div>
+
+<div class="support">
+
+<h3>Need Help?</h3>
+
+Telegram:
+@systemsbad
+
+</div>
 
 </div>
 
