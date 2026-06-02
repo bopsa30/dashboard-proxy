@@ -57,7 +57,7 @@ margin-bottom:15px;
 .info{
 color:#666;
 font-size:14px;
-margin-top:10px;
+margin-top:8px;
 }
 
 .proxy-grid{
@@ -114,21 +114,14 @@ margin-bottom:10px;
 color:#173b68;
 }
 
-</style>
-
-<script>
-
-function copyProxy(id){
-
-var text=document.getElementById(id).innerText;
-
-navigator.clipboard.writeText(text);
-
-alert("Proxy copied");
-
+.loading{
+text-align:center;
+color:#173b68;
+margin-top:30px;
+font-weight:bold;
 }
 
-</script>
+</style>
 
 </head>
 
@@ -151,123 +144,20 @@ Daily Refresh
 </div>
 
 <div class="info">
-15 Available Proxies
+<span id="proxyCount">0</span> Available Proxies
 </div>
 
 <div class="info">
-Last Updated:
-02 June 2026 - 09:15 WIB
+Last Updated Automatically From Google Sheet
 </div>
 
 </div>
 
-<div class="proxy-grid">
-
-<!-- Proxy 1 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #1</div>
-<div class="proxy-value" id="p1">ip:port:user:pass</div>
-<button onclick="copyProxy('p1')">Copy</button>
+<div id="loading" class="loading">
+Loading Proxies...
 </div>
 
-<!-- Proxy 2 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #2</div>
-<div class="proxy-value" id="p2">ip:port:user:pass</div>
-<button onclick="copyProxy('p2')">Copy</button>
-</div>
-
-<!-- Proxy 3 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #3</div>
-<div class="proxy-value" id="p3">ip:port:user:pass</div>
-<button onclick="copyProxy('p3')">Copy</button>
-</div>
-
-<!-- Proxy 4 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #4</div>
-<div class="proxy-value" id="p4">ip:port:user:pass</div>
-<button onclick="copyProxy('p4')">Copy</button>
-</div>
-
-<!-- Proxy 5 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #5</div>
-<div class="proxy-value" id="p5">ip:port:user:pass</div>
-<button onclick="copyProxy('p5')">Copy</button>
-</div>
-
-<!-- Proxy 6 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #6</div>
-<div class="proxy-value" id="p6">ip:port:user:pass</div>
-<button onclick="copyProxy('p6')">Copy</button>
-</div>
-
-<!-- Proxy 7 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #7</div>
-<div class="proxy-value" id="p7">ip:port:user:pass</div>
-<button onclick="copyProxy('p7')">Copy</button>
-</div>
-
-<!-- Proxy 8 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #8</div>
-<div class="proxy-value" id="p8">ip:port:user:pass</div>
-<button onclick="copyProxy('p8')">Copy</button>
-</div>
-
-<!-- Proxy 9 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #9</div>
-<div class="proxy-value" id="p9">ip:port:user:pass</div>
-<button onclick="copyProxy('p9')">Copy</button>
-</div>
-
-<!-- Proxy 10 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #10</div>
-<div class="proxy-value" id="p10">ip:port:user:pass</div>
-<button onclick="copyProxy('p10')">Copy</button>
-</div>
-
-<!-- Proxy 11 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #11</div>
-<div class="proxy-value" id="p11">ip:port:user:pass</div>
-<button onclick="copyProxy('p11')">Copy</button>
-</div>
-
-<!-- Proxy 12 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #12</div>
-<div class="proxy-value" id="p12">ip:port:user:pass</div>
-<button onclick="copyProxy('p12')">Copy</button>
-</div>
-
-<!-- Proxy 13 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #13</div>
-<div class="proxy-value" id="p13">ip:port:user:pass</div>
-<button onclick="copyProxy('p13')">Copy</button>
-</div>
-
-<!-- Proxy 14 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #14</div>
-<div class="proxy-value" id="p14">ip:port:user:pass</div>
-<button onclick="copyProxy('p14')">Copy</button>
-</div>
-
-<!-- Proxy 15 -->
-<div class="proxy-card">
-<div class="proxy-title">US Proxy #15</div>
-<div class="proxy-value" id="p15">ip:port:user:pass</div>
-<button onclick="copyProxy('p15')">Copy</button>
-</div>
-
+<div id="proxyGrid" class="proxy-grid">
 </div>
 
 <div class="support">
@@ -275,11 +165,99 @@ Last Updated:
 <h3>Need Help?</h3>
 
 Telegram:
-@systemsbad
+@username
 
 </div>
 
 </div>
+
+<script>
+
+const csvUrl =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vQgHscNUI4lyusus6NGDx52tJj9ZMk1v4YC9ODI42aXlamQkkhbQShoU2diDgKkgj4jURhuYzBY39R3/pub?gid=0&single=true&output=csv";
+
+function copyProxy(proxy,button){
+
+navigator.clipboard.writeText(proxy);
+
+button.innerText="Copied ✓";
+
+setTimeout(()=>{
+button.innerText="Copy";
+},2000);
+
+}
+
+fetch(csvUrl)
+
+.then(response => response.text())
+
+.then(data => {
+
+const rows =
+data.split("\n")
+.map(row => row.trim())
+.filter(row => row !== "");
+
+const proxies = rows.slice(1);
+
+document.getElementById("proxyCount").innerText =
+proxies.length;
+
+document.getElementById("loading").style.display =
+"none";
+
+const grid =
+document.getElementById("proxyGrid");
+
+proxies.forEach((proxy,index)=>{
+
+const card =
+document.createElement("div");
+
+card.className="proxy-card";
+
+card.innerHTML=`
+
+<div class="proxy-title">
+US Proxy #${index+1}
+</div>
+
+<div class="proxy-value">
+${proxy}
+</div>
+
+<button>
+Copy
+</button>
+
+`;
+
+const btn =
+card.querySelector("button");
+
+btn.addEventListener("click",()=>{
+
+copyProxy(proxy,btn);
+
+});
+
+grid.appendChild(card);
+
+});
+
+})
+
+.catch(error=>{
+
+document.getElementById("loading").innerHTML =
+"Failed to load proxies from Google Sheets";
+
+console.error(error);
+
+});
+
+</script>
 
 </body>
 </html>
