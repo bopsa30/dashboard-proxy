@@ -1,1 +1,1 @@
-# dashboard-proxy
+# jemari-proxy
