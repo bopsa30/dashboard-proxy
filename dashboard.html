@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>US Residential Proxy Dashboard</title>
+
+<style>
+
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+/* BACKGROUND */
+body{
+background:
+radial-gradient(circle at top left,#f7f0df 0%,transparent 40%),
+radial-gradient(circle at bottom right,#dfe8ff 0%,transparent 40%),
+linear-gradient(135deg,#f6f1e6,#e8e2d6);
+padding:20px;
+min-height:100vh;
+}
+
+/* CONTAINER */
+.container{
+max-width:950px;
+margin:auto;
+}
+
+/* HERO */
+.hero{
+background:rgba(255,255,255,0.45);
+backdrop-filter:blur(15px);
+padding:20px;
+border-radius:18px;
+margin-bottom:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.hero h1{
+color:#173b68;
+margin-bottom:8px;
+}
+
+.hero p{
+color:#666;
+font-size:14px;
+}
+
+/* STATS */
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:10px;
+margin-top:15px;
+}
+
+.stat-card{
+background:white;
+padding:15px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.stat-number{
+font-size:20px;
+font-weight:bold;
+color:#173b68;
+}
+
+/* STATUS */
+.status{
+display:inline-block;
+margin-top:10px;
+padding:6px 12px;
+border-radius:20px;
+background:#dff7e6;
+color:#1b8a3e;
+font-weight:bold;
+position:relative;
+padding-left:28px;
+}
+
+.status::before{
+content:"";
+width:9px;
+height:9px;
+background:#1b8a3e;
+border-radius:50%;
+position:absolute;
+left:10px;
+top:50%;
+transform:translateY(-50%);
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{box-shadow:0 0 0 0 rgba(27,138,62,0.5);}
+100%{box-shadow:0 0 0 10px rgba(27,138,62,0);}
+}
+
+/* ACTIONS */
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin:15px 0;
+}
+
+button{
+padding:10px 14px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+transition:0.2s;
+}
+
+.primary{
+background:#173b68;
+color:white;
+}
+
+.secondary{
+background:#ffffff;
+color:#173b68;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+button:active{
+transform:scale(0.96);
+opacity:0.8;
+}
+
+/* SEARCH */
+#search{
+width:100%;
+padding:12px;
+border-radius:12px;
+border:none;
+outline:none;
+margin-top:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* GRID */
+.proxy-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+/* CARD */
+.proxy-card{
+background:rgba(255,255,255,0.45);
+backdrop-filter:blur(15px);
+border-radius:18px;
+padding:18px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+transition:0.2s;
+}
+
+.proxy-card:hover{
+transform:translateY(-4px);
+box-shadow:0 15px 40px rgba(0,0,0,0.12);
+}
+
+.proxy-title{
+font-weight:bold;
+color:#173b68;
+margin-bottom:10px;
+}
+
+.proxy-value{
+background:white;
+padding:10px;
+border-radius:10px;
+font-size:13px;
+word-break:break-all;
+margin-bottom:10px;
+}
+
+/* LOADING */
+.loading{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+color:#173b68;
+margin-top:25px;
+font-weight:bold;
+}
+
+.loading::before{
+content:"";
+width:18px;
+height:18px;
+border:3px solid #173b68;
+border-top:3px solid transparent;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg);}
+}
+
+/* SUPPORT */
+.support{
+margin-top:30px;
+text-align:center;
+background:rgba(255,255,255,0.4);
+padding:20px;
+border-radius:18px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+
+<h1>Welcome Back 👋</h1>
+<p>US Residential Proxy Dashboard</p>
+
+<div id="status" class="status">ACTIVE</div>
+
+<input id="search" placeholder="Search proxy..." />
+
+<div class="actions">
+<button class="primary" onclick="copyAll()">Copy All Proxies</button>
+<button class="secondary" onclick="refreshTime()">Refresh Time</button>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+
+<div class="stat-card">
+<div class="stat-number" id="proxyCount">0</div>
+<div>Total Proxies</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-number" id="lastUpdated">-</div>
+<div>Last Updated</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- LOADING -->
+<div id="loading" class="loading">
+Loading Proxies...
+</div>
+
+<!-- GRID -->
+<div id="proxyGrid" class="proxy-grid"></div>
+
+<!-- SUPPORT -->
+<div class="support">
+<h3>Need Help?</h3>
+Telegram: @systemsbad
+</div>
+
+</div>
+
+<script>
+
+const csvUrl =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vQgHscNUI4lyusus6NGDx52tJj9ZMk1v4YC9ODI42aXlamQkkhbQShoU2diDgKkgj4jURhuYzBY39R3/pub?gid=0&single=true&output=csv";
+
+let allProxies = [];
+
+function updateTime(){
+document.getElementById("lastUpdated").innerText =
+new Date().toLocaleTimeString();
+}
+
+function copyProxy(proxy,btn){
+navigator.clipboard.writeText(proxy);
+btn.innerText="Copied ✓";
+
+setTimeout(()=>{
+btn.innerText="Copy";
+},2000);
+}
+
+function copyAll(){
+navigator.clipboard.writeText(allProxies.join("\n"));
+alert("All proxies copied!");
+}
+
+function render(proxies){
+
+const grid = document.getElementById("proxyGrid");
+grid.innerHTML = "";
+
+proxies.forEach((proxy,index)=>{
+
+const card = document.createElement("div");
+card.className="proxy-card";
+
+card.innerHTML=`
+<div class="proxy-title">Proxy #${index+1}</div>
+<div class="proxy-value">${proxy}</div>
+<button>Copy</button>
+`;
+
+const btn = card.querySelector("button");
+btn.addEventListener("click",()=>{
+copyProxy(proxy,btn);
+});
+
+grid.appendChild(card);
+});
+
+}
+
+fetch(csvUrl)
+.then(r=>r.text())
+.then(data=>{
+
+const rows = data.split("\n").map(r=>r.trim()).filter(Boolean);
+allProxies = rows.slice(1);
+
+document.getElementById("proxyCount").innerText = allProxies.length;
+
+document.getElementById("loading").style.display="none";
+
+render(allProxies);
+
+updateTime();
+
+})
+
+.catch(err=>{
+document.getElementById("loading").innerText =
+"Failed to load proxies";
+console.error(err);
+});
+
+/* SEARCH */
+document.getElementById("search").addEventListener("input",e=>{
+const val = e.target.value.toLowerCase();
+
+const filtered = allProxies.filter(p=>
+p.toLowerCase().includes(val)
+);
+
+render(filtered);
+});
+
+/* INIT TIME */
+updateTime();
+
+function refreshTime(){
+updateTime();
+}
+
+</script>
+
+</body>
+</html>
